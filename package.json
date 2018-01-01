@@ -1,0 +1,17 @@
+{
+  "name": "variant-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chesslib": "^0.9.10",
+    "mongoose": "^4.13.7",
+    "pgn-parser": "0.0.9",
+    "restify": "^6.3.4"
+  }
+}
