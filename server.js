@@ -19,8 +19,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('../front/dist/'));
 app.use('/api', routes.api);
 
+log.debug('root:', path.join( __dirname, '../'));
+
 app.get('*', (req, res, next) => {
-  res.sendFile('/front/dist/index.html', { root: path.resolve('..', __dirname) });
+  res.sendFile('/front/dist/index.html', { root: path.join( __dirname, '../') });
 });
 
 app.listen(port, () => {
