@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const path = require('path');
 const bunyan = require('bunyan');
 const log = bunyan.createLogger({name: "Reperto API"});
 
@@ -15,11 +16,11 @@ log.level('debug');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(express.static('../front/dist/'));
+app.use(express.static('../front/dist/'));
 app.use('/api', routes.api);
 
 app.get('*', (req, res, next) => {
-  res.sendFile('../front/dist/index.html', { root: __dirname });
+  res.sendFile('/front/dist/index.html', { root: path.resolve('..', __dirname) });
 });
 
 app.listen(port, () => {
