@@ -18,13 +18,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('../front/dist/'));
 app.use('/api', routes.api);
 
-app.get('/hello/:name', (req, res) => {
-  res.status(200).send(req.params);
-})
-
-app.get('[^index.html]*', (req, res) => {
-  res.redirect('/index.html');
-})
+app.get('*', (req, res, next) => {
+  res.sendFile('index.html', { root: __dirname });
+});
 
 app.listen(port, () => {
   log.info('Listening on port', port);
