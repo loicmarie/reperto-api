@@ -15,11 +15,11 @@ log.level('debug');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('../front/dist/'));
+// app.use(express.static('../front/dist/'));
 app.use('/api', routes.api);
 
 app.get('*', (req, res, next) => {
-  res.sendFile('index.html', { root: __dirname });
+  res.sendFile('../front/dist/index.html', { root: __dirname });
 });
 
 app.listen(port, () => {
