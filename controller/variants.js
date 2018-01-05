@@ -26,7 +26,8 @@ exports.create = (req, res, next) => {
   let newVariant = new Variant({
     name: req.body.name,
     nodes: req.body.nodes,
-    color: req.body.color
+    color: req.body.color,
+    tabia: req.body.tabia
   });
   newVariant.markModified('nodes');
   newVariant.save((err, variant) => {

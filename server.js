@@ -5,7 +5,7 @@ const path = require('path');
 const bunyan = require('bunyan');
 const log = bunyan.createLogger({name: "Reperto API"});
 
-let port = process.env.REPERTO_API_PORT || 3000;
+let port = process.env.NODE_ENV == 'production' ? 80 : 3000;
 let routes = {
   api: require('./routes/api'),
   web: require('./routes/web')
@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api', routes.api);
 
-if (process.env.REPERTO_ENV == 'prod') {
+if (process.env.NODE_ENV == 'production') {
   app.use(express.static('../front/dist/'));
   app.get('*', (req, res, next) => {
     res.sendFile('/front/dist/index.html', { root: path.join( __dirname, '../') });
