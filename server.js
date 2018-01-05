@@ -21,7 +21,7 @@ app.use('/api', routes.api);
 if (process.env.NODE_ENV == 'production') {
   app.use(express.static('../front/dist/'));
   app.get('*', (req, res, next) => {
-    res.sendFile('../front/dist/index.html'); // , { root: path.join( __dirname, '../') }
+    res.sendFile('/front/dist/index.html', { root: path.join( __dirname, '../') });
   });
 }
 
