@@ -6,7 +6,7 @@ const log = bunyan.createLogger({name: "Reperto API"});
 
 log.level('debug');
 
-mongoose.connect('mongodb://localhost/reperto', { useMongoClient: true });
+mongoose.connect('mongodb://db/reperto', { useMongoClient: true });
 mongoose.Promise = global.Promise;
 
 // CRUD
