@@ -10,12 +10,20 @@ log.level('debug');
 mongoose.connect('mongodb://db/reperto', { useMongoClient: true });
 mongoose.Promise = global.Promise;
 
+const userPopulateQuery = [
+  {path: 'variants'},
+  {
+    path: 'repertoires',
+    populate: {path: 'variants', model: 'Variant'}
+  }
+];
+
 // CRUD
 
 exports.list = (req, res, next) => {
   log.debug('Users LIST');
   User.find({})
-    .populate('variants')
+    .populate(userPopulateQuery)
     .exec((err, users) => {
 
     if (err) next(err);
@@ -32,7 +40,7 @@ exports.create = (req, res, next) => {
   });
   newUser.save((err, user) => {
     if (err) next(err);
-    User.populate(user, {path: 'variants'}, (err, user) => {
+    User.populate(user, userPopulateQuery, (err, user) => {
 
       if (err) next(err);
       res.status(200).send(user);
@@ -43,7 +51,7 @@ exports.create = (req, res, next) => {
 exports.get = (req, res, next) => {
   log.debug('Users GET', req.params);
   User.findOne({'_id': req.params.id})
-    .populate('variants')
+    .populate(userPopulateQuery)
     .exec((err, user) => {
 
     if (err) next(err);
@@ -75,7 +83,7 @@ exports.delete = (req, res, next) => {
 exports.getFromUserId = (req, res, next) => {
   log.debug('Users GETfromUID', req.params);
   User.findOne({'userId': req.params.id})
-    .populate('variants')
+    .populate(userPopulateQuery)
     .exec((err, user) => {
 
     if (err) next(err);
