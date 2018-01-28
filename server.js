@@ -14,8 +14,8 @@ let routes = {
 
 log.level('debug');
 
-app.use(bodyParser.json({limit: '500mb'}));
-app.use(bodyParser.urlencoded({limit: '500mb', extended: true}));
+app.use(bodyParser.json({limit: 200000}));
+app.use(bodyParser.urlencoded({limit: 200000, extended: true}));
 app.use('/api', routes.api);
 
 if (process.env.NODE_ENV == 'production') {
