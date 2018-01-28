@@ -1,4 +1,5 @@
-const routes = require('express').Router();
+const express = require('express');
+const routes = express.Router();
 const users = require('../controller/users');
 const variants = require('../controller/variants');
 const repertoires = require('../controller/repertoires');
@@ -18,9 +19,9 @@ routes.get('/users/uid/:id', users.getFromUserId);
 
 // Variants CRUD
 routes.get('/variants', variants.list);
-routes.post('/variants', variants.create);
+routes.post('/variants', express.bodyParser({limit: '500mb'}), variants.create);
 routes.get('/variants/:id', variants.get);
-routes.post('/variants/:id', variants.update);
+routes.post('/variants/:id', express.bodyParser({limit: '500mb'}), variants.update);
 routes.delete('/variants/:id', variants.delete);
 
 // Repertoires CRUD
